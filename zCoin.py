@@ -84,8 +84,8 @@ class Blockchain:
         network = self.nodes
         longest_chain = None
         max_length = len(self.chain)
-        for nodes in network:
-            response = requests.get(f'http://node/get_chain')
+        for node in network:
+            response = requests.get(f'http://{node}/get_chain')
             if response.status_code == 200:
                 length = response.json()['length']
                 chain = response.json()['chain']
@@ -151,7 +151,7 @@ def is_valid():
 def add_transaction():
     json = request.get_json()
     transaction_keys = ['sender', 'receiver', 'amount']
-    if not all (keys in json for key in transaction_keys):
+    if not all (key in json for key in transaction_keys):
         return 'Some elements of the transaction are missing', 400
     index = blockchain.add_transaction(json['sender'], json['receiver'], json['amount'])
     response = {'message': f'this transaction will be added to block {index}'}
