@@ -166,7 +166,7 @@ def connect_node():
         return "No node", 400
     for node in nodes:
         blockchain.add_node(node)
-    response = {'message': 'All the nodes are now connected. The Hadcoin Blockchain now contains the following nodes:',
+    response = {'message': 'All the nodes are now connected. The zcoin Blockchain now contains the following nodes:',
                 'total_nodes': list(blockchain.nodes)}
     return jsonify(response), 201
 # Replacing the chain by the longest chain if needed
